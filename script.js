@@ -1,4 +1,5 @@
 var slideIndex = 1;
+var testimonials = document.querySelectorAll('.testimonial-card')
 var prev = document.querySelector('.prev')
 var next = document.querySelector('.next')
 
@@ -32,8 +33,16 @@ function showSlides(n) {
     }
     testimonials[slideIndex-1].style.display = "block";
     dots[slideIndex-1].className += " active"
-    console.log(slideIndex)
 }
+
+setInterval(() => {
+    if (slideIndex < testimonials.length) {
+        showSlides(slideIndex++)
+    } else {
+        slideIndex = 1;
+        showSlides(slideIndex)
+    }
+}, 3000)
 
 prev.addEventListener('click', () => {
     slideIndex = slideIndex - 1;
