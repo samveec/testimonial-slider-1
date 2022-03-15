@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 html {
@@ -12,143 +12,188 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight:  400px;
     font-size: 1.6rem;
-    padding: 3rem;
     line-height: 1.7;
-    width: 100vh;
+    width: 100%;
     height: 100vh;
-
-    box-sizing: border-box;
-    background: rgb(255,203,87);
-    background: linear-gradient(306deg, rgba(255,203,87,1) 0%, rgba(255,138,138,1) 100%); 
+    display: grid;
+    align-items: center;
+    align-self: center;
+    justify-items: center;
+    height: 100vh;
 }
 
-.italic {
-    font-style: italic;
-}
-
-.large {
-    font-weight: 600px;
-    font-weight: bold;
-}
-
-.test-container {
-    position: relative;
-    width: 95vw;
-    padding: 0;
-    margin: 0 auto;
-    overflow: hidden;
-    outline: 1px solid #f43;
-}
-
-.testimonial-slider {
+.chef-slider.swiper {
+    width: 100%;
+    max-width: 100%;
     display: flex;
-    min-height: 100%;
-    margin: 0 auto;
-}
-
-.wrapper {
-    width: 800px;
-    padding: 50px;
-    margin: 0 auto;
-    position: relative;
     justify-content: center;
-}
-
-.testimonial-card {
-    display: none;
-    background: #fff;
-    margin: 1rem;
-    border-radius: 10px;
-    padding: 1.5rem;
-    text-align: center;
     padding: 20px;
-    margin: 0 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-    animation: slideIn .5s ease-in;
+    padding-bottom: 100px;
+    overflow: hidden;
 }
 
-.testimonial-img {
-    height: 150px;
-    width: 150px;
-    display: block;
-    margin: 0 auto;
-}
-
-.testimonial-img .img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 100%;
-    margin: 0 auto;
-    padding: 1rem;
-    display: block;
-}
-
-.arrows .prev,
-.arrows .next {
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    width: auto;
-    font-weight: bold;
-    transform: scale(2);
-    user-select: none;
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-    border:none;
-    background: none;
-}
-
-.arrows .prev {
-    left: 50px;
-}
-
-.arrows .next {
-    right: 50px;
-}
-
-.dot-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    bottom: 0;
-    margin: 0 auto;
-}
-
-.dot-container .dot {
-    background: none;
-    border: none;
-    outline: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    margin-left: 1rem;
-    transition: .5s;
-    cursor: pointer;
-}
-
-.dot-container .dot.active {
-    border-radius: 50px;
+.chef-slider.swiper-wrapper {
+    min-height: 100%;
+    width: 100vw;
     background: #fff;
 }
 
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-    }
+.chef-slider .swiper-slide {
+    border-radius: 10px;
+    position: relative;
+    max-width: 480px;
+    min-height: 580px;
+    background: #f9f9f9;
+    box-shadow: 0 10px 15px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
 
-    100% {
-        opacity: 1;
+.chef-slider .swiper-slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #f9f9f9;
+    z-index: 1;
+}
+
+.chef-text {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.chef-name {
+    font-size: 24px;
+}
+
+.chef-teaches {
+    font-size: 16px;
+    font-style: italic;
+    color: #c9c9c9;
+}
+
+.chef-course {
+    font-size: 20px; 
+}
+
+.chef-slider .swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,.8) 10%, rgba(0,0,0,0) 70%);
+    z-index: 2;
+    opacity: .9;
+} 
+
+.chef-slider .swiper-slide .chef-text {
+    position: absolute;
+    font-size: 3rem;
+    z-index: 20;
+    color: #fff;
+    bottom:  20px;
+    left: 20px;
+    animation: fadeOut .8s;
+    opacity: 0%;
+    
+}
+
+.chef-slider .swiper-slide-active {
+    transform: scale(1.05)
+}
+
+.chef-slider .swiper-slide-active .chef-text {
+    opacity: 100%;
+    animation: fadeIn 1s
+}
+
+/* Buttons Prev, Next, Pagination */
+
+.chef-slider .swiper-button-prev, 
+.chef-slider .swiper-button-next {
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 10px
+}
+
+.chef-slider .swiper-button-next:after,
+.chef-slider .swiper-button-prev:after {
+    font-size: 1rem;
+    color: #333;
+    font-weight:  bold;
+}
+
+.chef-slider .swiper-pagination-bullet {
+    background: #333;
+}
+
+/* Fade Animations for Text */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
     }
 }
 
-@media (max-width: 800px) {
-    .container {
-        width: 70%;
-        margin: auto;
+@keyframes fadeOut {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0
+    }
+}
+
+/* Adjustment for different screens */
+
+@media (max-width: 480px) {
+    .chef-slider .swiper-slide {
+        border-radius: 10px;
+        position: relative;
+        max-width: 300px;
+        min-height: 400px;
+        background: #f9f9f9;
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+        overflow: hidden;
     }
 
+    .chef-slider .swiper-button-prev, 
+    .chef-slider .swiper-button-next  {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .chef-slider .chef-text {
+        margin: 0px
+    }
+    .chef-slider .chef-name {
+        font-size: 20px;
+    }
+    
+    .chef-slider .chef-teaches {
+        font-size: 14px;
+        font-style: italic;
+    }
+    
+    .chef-slider .chef-course {
+        font-size: 18px; 
+    }
 }
